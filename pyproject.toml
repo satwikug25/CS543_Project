@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "chessbot"
+version = "0.1.0"
+description = ""
+authors = ["Keval Shah <keval.arhan@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ultralytics = "^8.3.96"
+shapely = "^2.0.7"
+google-genai = "^1.13.0"
+opencv-contrib-python = "^4.11.0.86"
+pymycobot = "^3.9.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
