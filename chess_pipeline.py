@@ -19,7 +19,24 @@ except ImportError:
     # dotenv not installed, but that's okay - user might have set env vars manually
     pass
 
+def convert_detected_to_board_state(detected_state):
+    """Convert detected labels ('object', 'object-black', 'empty') to board state labels ('piece-white', 'piece-black', 'empty')"""
+    board_state = [['empty' for _ in range(8)] for _ in range(8)]
+    for row in range(8):
+        for col in range(8):
+            label = detected_state[row][col]
+            if label == 'piece-white':
+                board_state[row][col] = 'piece-white'
+            elif label == 'piece-black':
+                board_state[row][col] = 'piece-black'
+            else:  # 'empty' or 'error'
+                board_state[row][col] = 'empty'
+    return board_state
+
 def detect_white_move_from_frame(board, detected_state):
+    # Convert detected state labels to board state labels
+    detected_state_converted = convert_detected_to_board_state(detected_state)
+    
     previous_board_state = [['empty' for _ in range(8)] for _ in range(8)]
     for square in chess.SQUARES:
         piece = board.piece_at(square)
@@ -35,7 +52,7 @@ def detect_white_move_from_frame(board, detected_state):
     for row in range(8):
         for col in range(8):
             before = previous_board_state[row][col]
-            after = detected_state[row][col]
+            after = detected_state_converted[row][col]
             if before != after:
                 file = 7 - col  # 0->7 maps to h->a
                 rank = row      # 0->7 maps to 1->8
@@ -211,16 +228,20 @@ class ChessPipeline:
                             contents=[
                                 img,
                                 (
-                                    "You will be given a top-down photo of a square. "
-                                    "Your task is to check if the square has a circular object and classify into one of three categories: "
-                                    "empty, object, object-black. "
-                                    "Respond with exactly one of these labels and nothing else."
+                                    "This is a top-down photo of a single chess board square. "
+                                    "Classify what you see into exactly ONE of these three categories:\n\n"
+                                    "- 'empty' = no chess piece on the square (you only see the board surface)\n"
+                                    "- 'piece-white' = a WHITE/LIGHT colored chess piece is present (cream, beige, light wood, or white color)\n"
+                                    "- 'piece-black' = a BLACK/DARK colored chess piece is present (dark brown, black, or very dark color)\n\n"
+                                    "Look at the COLOR of the piece itself, not the square color. "
+                                    "Chess pieces are typically cylindrical or have a circular top when viewed from above.\n\n"
+                                    "Respond with ONLY one word: empty, piece-white, or piece-black"
                                 )
                             ],
                         )
                         label = response.text.strip().lower()
                         # Validate response
-                        if label not in ['empty', 'object', 'object-black']:
+                        if label not in ['empty', 'piece-white', 'piece-black']:
                             print(f"Warning: Invalid label '{label}' for piece_r{r}_c{c}.png, retrying...")
                             time.sleep(1)  # Brief delay before retry
                             attempts += 1
@@ -287,58 +308,67 @@ class ChessPipeline:
             with open('detection.json', 'r') as f:
                 data = json.load(f)
             
-            if len(data) < 2:
+            if len(data) < 1:
                 return
 
-            # Get the last two frames
-            prev_frame = data[-2]
+            # Get the latest frame
             curr_frame = data[-1]
 
-            # Convert frames to board states
-            prev_state = [['empty' for _ in range(8)] for _ in range(8)]
+            # Convert frame to board state
             curr_state = [['empty' for _ in range(8)] for _ in range(8)]
 
-            for cell in prev_frame['results']:
-                prev_state[cell['r']][cell['c']] = cell['label']
             for cell in curr_frame['results']:
                 curr_state[cell['r']][cell['c']] = cell['label']
 
-            # Detect move
+            # Detect move (works for both white and black)
             try:
-                detected_white_move = detect_white_move_from_frame(self.board_state.board, curr_state)
+                detected_move = detect_white_move_from_frame(self.board_state.board, curr_state)
             except Exception as e:
                 # No valid move detected (expected when board states are identical or no move occurred)
                 print(f"Note: {str(e)}")
                 return
-            white_move_obj = chess.Move.from_uci(detected_white_move)
-            if white_move_obj in self.board_state.board.legal_moves:
-                from_square = detected_white_move[:2]
-                to_square = detected_white_move[2:]
-                white_pickup, white_place = self.coords.get_move_coordinates(from_square, to_square)
-                print(f"White move: {detected_white_move}")
-                print(f"Robot coordinates - Pickup: {white_pickup}, Place: {white_place}")
-                self.board_state.board.push(white_move_obj)
-                print("\nBoard state after White move:")
-                print(self.board_state.board)
-                fen_after_white = self.board_state.board.fen()
-                print(f"FEN after White move: {fen_after_white}")
-                best_black_move = get_lichess_best_move(fen_after_white)
-                print(f"Lichess best move for Black: {best_black_move}")
-                black_move_obj = chess.Move.from_uci(best_black_move)
-                if black_move_obj in self.board_state.board.legal_moves:
-                    from_square = best_black_move[:2]
-                    to_square = best_black_move[2:]
-                    black_pickup, black_place = self.coords.get_move_coordinates(from_square, to_square)
-                    print(f"Black move: {best_black_move}")
-                    print(f"Robot coordinates - Pickup: {black_pickup}, Place: {black_place}")
-                    self.board_state.board.push(black_move_obj)
-                    print("\nBoard state after Black move:")
-                    print(self.board_state.board)
-                    print(f"FEN after Black move: {self.board_state.board.fen()}")
+            
+            move_obj = chess.Move.from_uci(detected_move)
+            
+            # Determine whose turn it is
+            is_white_turn = self.board_state.board.turn == chess.WHITE
+            
+            if move_obj in self.board_state.board.legal_moves:
+                from_square = detected_move[:2]
+                to_square = detected_move[2:]
+                pickup, place = self.coords.get_move_coordinates(from_square, to_square)
+                
+                # Apply the detected move
+                if is_white_turn:
+                    print(f"White move detected: {detected_move}")
+                    print(f"Robot coordinates - Pickup: {pickup}, Place: {place}")
                 else:
-                    print(f"⚠ Illegal Black move detected: {best_black_move}")
+                    print(f"Black move detected: {detected_move}")
+                    print(f"Robot coordinates - Pickup: {pickup}, Place: {place}")
+                
+                self.board_state.board.push(move_obj)
+                print(f"\nBoard state after {'White' if is_white_turn else 'Black'} move:")
+                print(self.board_state.board)
+                fen_after_move = self.board_state.board.fen()
+                print(f"FEN after move: {fen_after_move}")
+                
+                # Get opponent's best move (suggestion only, don't apply it)
+                if self.board_state.board.turn == chess.BLACK:
+                    best_black_move = get_lichess_best_move(fen_after_move)
+                    print(f"\nSuggested Black move: {best_black_move}")
+                    black_move_obj = chess.Move.from_uci(best_black_move)
+                    if black_move_obj in self.board_state.board.legal_moves:
+                        from_square = best_black_move[:2]
+                        to_square = best_black_move[2:]
+                        black_pickup, black_place = self.coords.get_move_coordinates(from_square, to_square)
+                        print(f"Robot coordinates for Black move - Pickup: {black_pickup}, Place: {black_place}")
+                        print("(Move not applied - waiting for physical move on board)")
+                    else:
+                        print(f"⚠ Illegal Black move suggested: {best_black_move}")
+                else:
+                    print("\nIt's White's turn to move.")
             else:
-                print(f"⚠ Illegal White move detected: {detected_white_move}")
+                print(f"⚠ Illegal move detected: {detected_move}")
 
         except Exception as e:
             print(f"Error processing moves: {e}")

@@ -5,322 +5,322 @@
       {
         "r": 0,
         "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 3,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 4,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 5,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 6,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 7,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
+        "c": 3,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 4,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 5,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 6,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 7,
+        "label": "piece-white"
+      },
+      {
+        "r": 2,
+        "c": 0,
+        "label": "empty"
+      },
+      {
+        "r": 2,
+        "c": 1,
+        "label": "empty"
+      },
+      {
+        "r": 2,
+        "c": 2,
+        "label": "empty"
+      },
+      {
+        "r": 2,
         "c": 3,
         "label": "empty"
       },
       {
-        "r": 1,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 1,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 1,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 1,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 3,
-        "label": "error"
-      },
-      {
         "r": 2,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 7,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 4,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 6,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 7,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 6,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 7,
         "c": 7,
-        "label": "error"
+        "label": "piece-black"
       }
     ]
   },
@@ -330,1222 +330,322 @@
       {
         "r": 0,
         "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 3,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 3,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 4,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 4,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 5,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 5,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 6,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 6,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 7,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 7,
-        "label": "object"
+        "label": "empty"
       },
       {
         "r": 1,
         "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 1,
-        "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 1,
         "c": 4,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 5,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 6,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 7,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 2,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 3,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 3,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 6,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 7,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 6,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
+        "label": "piece-black"
       }
     ]
   },
@@ -1555,116 +655,56 @@
       {
         "r": 0,
         "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 3,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 3,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 4,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 4,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 5,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 5,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 6,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 6,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 7,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 7,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 3,
         "label": "empty"
       },
       {
@@ -1675,47 +715,22 @@
       {
         "r": 1,
         "c": 4,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 4,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 5,
-        "label": "object-black"
-      },
-      {
-        "r": 1,
-        "c": 5,
-        "label": "object-black"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 6,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 6,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 7,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 7,
-        "label": "object"
-      },
-      {
-        "r": 2,
-        "c": 0,
-        "label": "empty"
+        "label": "piece-white"
       },
       {
         "r": 2,
@@ -1725,16 +740,6 @@
       {
         "r": 2,
         "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 2,
-        "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 2,
-        "c": 2,
         "label": "empty"
       },
       {
@@ -1749,22 +754,7 @@
       },
       {
         "r": 2,
-        "c": 3,
-        "label": "empty"
-      },
-      {
-        "r": 2,
         "c": 4,
-        "label": "empty"
-      },
-      {
-        "r": 2,
-        "c": 4,
-        "label": "empty"
-      },
-      {
-        "r": 2,
-        "c": 5,
         "label": "empty"
       },
       {
@@ -1779,618 +769,208 @@
       },
       {
         "r": 2,
-        "c": 6,
+        "c": 7,
         "label": "empty"
-      },
-      {
-        "r": 2,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 7,
-        "label": "error"
       },
       {
         "r": 3,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 3,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 3,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 4,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 6,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 7,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 6,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 7,
         "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
+        "label": "piece-black"
       }
     ]
   },
@@ -2400,117 +980,57 @@
       {
         "r": 0,
         "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 3,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 3,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 4,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 4,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 5,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 5,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 6,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 6,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 7,
-        "label": "object"
-      },
-      {
-        "r": 0,
-        "c": 7,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 0,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 1,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 2,
-        "label": "object"
-      },
-      {
-        "r": 1,
-        "c": 3,
         "label": "empty"
+      },
+      {
+        "r": 0,
+        "c": 2,
+        "label": "piece-white"
+      },
+      {
+        "r": 0,
+        "c": 3,
+        "label": "piece-white"
+      },
+      {
+        "r": 0,
+        "c": 4,
+        "label": "piece-white"
+      },
+      {
+        "r": 0,
+        "c": 5,
+        "label": "piece-white"
+      },
+      {
+        "r": 0,
+        "c": 6,
+        "label": "piece-white"
+      },
+      {
+        "r": 0,
+        "c": 7,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 0,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 1,
+        "label": "piece-white"
+      },
+      {
+        "r": 1,
+        "c": 2,
+        "label": "piece-white"
       },
       {
         "r": 1,
@@ -2520,1107 +1040,262 @@
       {
         "r": 1,
         "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 1,
-        "c": 4,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 5,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 6,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 7,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 2,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 2,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 2,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 2,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 3,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 3,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 3,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 4,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 4,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 0,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 1,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 2,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 4,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 5,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 6,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 5,
         "c": 7,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 3,
-        "label": "error"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 6,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 7,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 0,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 1,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 2,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 3,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 4,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 5,
-        "label": "error"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 6,
-        "label": "error"
+        "label": "piece-white"
       },
       {
         "r": 7,
         "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 2,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 3,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 4,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 5,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 6,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 0,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 1,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 2,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 3,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 4,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 5,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 6,
-        "label": "error"
-      },
-      {
-        "r": 7,
-        "c": 7,
-        "label": "error"
+        "label": "piece-black"
       }
     ]
   },
@@ -3630,7 +1305,7 @@
       {
         "r": 0,
         "c": 0,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
@@ -3640,47 +1315,47 @@
       {
         "r": 0,
         "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 3,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 4,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 5,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 6,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 0,
         "c": 7,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 0,
-        "label": "object"
+        "label": "empty"
       },
       {
         "r": 1,
         "c": 1,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 2,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
@@ -3690,22 +1365,22 @@
       {
         "r": 1,
         "c": 4,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 5,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 6,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 1,
         "c": 7,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 2,
@@ -3720,7 +1395,7 @@
       {
         "r": 2,
         "c": 2,
-        "label": "empty"
+        "label": "piece-white"
       },
       {
         "r": 2,
@@ -3765,7 +1440,7 @@
       {
         "r": 3,
         "c": 3,
-        "label": "object"
+        "label": "piece-white"
       },
       {
         "r": 3,
@@ -3805,7 +1480,7 @@
       {
         "r": 4,
         "c": 3,
-        "label": "empty"
+        "label": "piece-black"
       },
       {
         "r": 4,
@@ -3855,7 +1530,7 @@
       {
         "r": 5,
         "c": 5,
-        "label": "empty"
+        "label": "piece-black"
       },
       {
         "r": 5,
@@ -3870,82 +1545,82 @@
       {
         "r": 6,
         "c": 0,
-        "label": "object-black"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 1,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 2,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 3,
-        "label": "object"
+        "label": "empty"
       },
       {
         "r": 6,
         "c": 4,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 5,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 6,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 6,
         "c": 7,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 0,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 1,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 2,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 3,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 4,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 5,
-        "label": "object"
+        "label": "piece-black"
       },
       {
         "r": 7,
         "c": 6,
-        "label": "object"
+        "label": "empty"
       },
       {
         "r": 7,
         "c": 7,
-        "label": "object-black"
+        "label": "piece-black"
       }
     ]
   }
