@@ -2,39 +2,34 @@ import os
 from PIL import Image
 from google import genai
 
-# Load .env file if it exists
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
-    # dotenv not installed, but that's okay - user might have set env vars manually
     pass
 
-# Read API keys from environment
-keys = [
+api_key_list = [
     os.getenv("GEMINI_API_KEY"),
     os.getenv("GEMINI_API_KEY2"),
     os.getenv("GEMINI_API_KEY3"),
     os.getenv("GEMINI_API_KEY4"),
 ]
 
-def test_vlm_api(image_path, test_key_index=0):
-    """Test the VLM API with a single image"""
+def run_api_test(img_path, key_idx=0):
     
-    if not os.path.exists(image_path):
-        print(f"Error: Image file '{image_path}' not found!")
+    if not os.path.exists(img_path):
+        print(f"Error: Image file '{img_path}' not found!")
         print("\nAvailable images in grid_piece folder:")
         if os.path.exists("grid_piece"):
-            images = [f for f in os.listdir("grid_piece") if f.endswith('.png')]
-            for img in images[:5]:  # Show first 5
+            img_files = [f for f in os.listdir("grid_piece") if f.endswith('.png')]
+            for img in img_files[:5]:
                 print(f"  - grid_piece/{img}")
-            if len(images) > 5:
-                print(f"  ... and {len(images) - 5} more")
+            if len(img_files) > 5:
+                print(f"  ... and {len(img_files) - 5} more")
         return False
     
-    # Check if we have any valid keys
-    valid_keys = [key for key in keys if key]
-    if not valid_keys:
+    working_keys = [k for k in api_key_list if k]
+    if not working_keys:
         print("Error: No API keys found in environment variables!")
         print("Please set at least one of: GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3, GEMINI_API_KEY4")
         print("\nIf you have a .env file, make sure python-dotenv is installed:")
@@ -43,26 +38,25 @@ def test_vlm_api(image_path, test_key_index=0):
         print("  poetry add python-dotenv")
         return False
     
-    # Use the specified key index, or first available key
-    key_to_use = None
-    if test_key_index < len(keys) and keys[test_key_index]:
-        key_to_use = keys[test_key_index]
+    selected_key = None
+    if key_idx < len(api_key_list) and api_key_list[key_idx]:
+        selected_key = api_key_list[key_idx]
     else:
-        key_to_use = valid_keys[0]
+        selected_key = working_keys[0]
     
-    print(f"Testing VLM API with image: {image_path}")
-    print(f"Using API key ending in: ...{key_to_use[-4:] if key_to_use else 'N/A'}")
+    print(f"Testing VLM API with image: {img_path}")
+    print(f"Using API key ending in: ...{selected_key[-4:] if selected_key else 'N/A'}")
     print("-" * 50)
     
     try:
-        client = genai.Client(api_key=key_to_use)
-        img = Image.open(image_path)
+        api_client = genai.Client(api_key=selected_key)
+        test_img = Image.open(img_path)
         
         print("Sending request to Gemini API...")
-        response = client.models.generate_content(
+        api_response = api_client.models.generate_content(
             model="gemini-2.0-flash-exp",
             contents=[
-                img,
+                test_img,
                 (
                     "You will be given a top-down photo of a square. "
                     "Your task is to check if the square has a circular object and classify into one of three categories: "
@@ -72,43 +66,39 @@ def test_vlm_api(image_path, test_key_index=0):
             ],
         )
         
-        label = response.text.strip().lower()
+        result = api_response.text.strip().lower()
         print(f"✓ API call successful!")
-        print(f"Response: {label}")
+        print(f"Response: {result}")
         print("-" * 50)
         
-        # Validate response
-        valid_labels = ['empty', 'object', 'object-black']
-        if label in valid_labels:
-            print(f"✓ Response is valid: '{label}'")
+        expected_labels = ['empty', 'object', 'object-black']
+        if result in expected_labels:
+            print(f"✓ Response is valid: '{result}'")
             return True
         else:
-            print(f"⚠ Response is not one of the expected labels: {valid_labels}")
-            print(f"  Got: '{label}'")
+            print(f"⚠ Response is not one of the expected labels: {expected_labels}")
+            print(f"  Got: '{result}'")
             return False
             
-    except Exception as e:
+    except Exception as err:
         print(f"✗ API call failed!")
-        print(f"Error: {e}")
+        print(f"Error: {err}")
         print("-" * 50)
         
-        # Try next available key if this one failed
-        if test_key_index < len(valid_keys) - 1:
+        if key_idx < len(working_keys) - 1:
             print(f"\nTrying next available API key...")
-            return test_vlm_api(image_path, test_key_index + 1)
+            return run_api_test(img_path, key_idx + 1)
         
         return False
 
 if __name__ == "__main__":
-    # Test with the first available grid piece image
-    test_image = "grid_piece/piece_r0_c0.png"
+    sample_img = "grid_piece/piece_r0_c0.png"
     
-    # If that doesn't exist, try to find any image
-    if not os.path.exists(test_image):
+    if not os.path.exists(sample_img):
         if os.path.exists("grid_piece"):
-            images = [f"grid_piece/{f}" for f in os.listdir("grid_piece") if f.endswith('.png')]
-            if images:
-                test_image = images[0]
+            available_imgs = [f"grid_piece/{f}" for f in os.listdir("grid_piece") if f.endswith('.png')]
+            if available_imgs:
+                sample_img = available_imgs[0]
             else:
                 print("No images found in grid_piece folder!")
                 print("Please run the pipeline first to generate grid piece images, or specify an image path.")
@@ -117,10 +107,9 @@ if __name__ == "__main__":
             print("grid_piece folder not found!")
             exit(1)
     
-    success = test_vlm_api(test_image)
+    test_passed = run_api_test(sample_img)
     
-    if success:
+    if test_passed:
         print("\n✓ VLM API is working correctly!")
     else:
         print("\n✗ VLM API test failed. Please check your API keys and network connection.")
-

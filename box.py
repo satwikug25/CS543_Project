@@ -1,18 +1,14 @@
 class BoxCoordinates:
     def __init__(self):
-        # Initialize coordinates for each square
-        # Format: (row, col) where:
-        # row: 0-7 (bottom to top)
-        # col: 0-7 (right to left)
-        self.coordinates = {
-            'h1': (0, 0),    # Bottom right
+        self.position_map = {
+            'h1': (0, 0),
             'g1': (0, 1),
             'f1': (0, 2),
             'e1': (0, 3),
             'd1': (0, 4),
             'c1': (0, 5),
             'b1': (0, 6),
-            'a1': (0, 7),    # Bottom left
+            'a1': (0, 7),
             
             'h2': (1, 0),
             'g2': (1, 1),
@@ -75,34 +71,30 @@ class BoxCoordinates:
             'd8': (7, 4),
             'c8': (7, 5),
             'b8': (7, 6),
-            'a8': (7, 7),    # Top left
+            'a8': (7, 7),
         }
     
-    def get_coordinates(self, square):
-        """Get the matrix coordinates for a given chess square."""
-        if square not in self.coordinates:
-            raise ValueError(f"Invalid square: {square}")
-        return self.coordinates[square]
+    def get_coordinates(self, square_name):
+        if square_name not in self.position_map:
+            raise ValueError(f"Invalid square: {square_name}")
+        return self.position_map[square_name]
     
-    def get_move_coordinates(self, from_square, to_square):
-        """Get the coordinates for a complete move."""
-        from_coords = self.get_coordinates(from_square)
-        to_coords = self.get_coordinates(to_square)
-        return from_coords, to_coords
+    def get_move_coordinates(self, origin_square, target_square):
+        origin_pos = self.get_coordinates(origin_square)
+        target_pos = self.get_coordinates(target_square)
+        return origin_pos, target_pos
 
-# Example usage
 if __name__ == "__main__":
-    coords = BoxCoordinates()
+    coord_helper = BoxCoordinates()
     
-    # Test some moves
-    test_moves = [
-        ("e2", "e4"),  # Common opening move
-        ("e7", "e5"),  # Common response
-        ("g1", "f3"),  # Knight development
+    sample_moves = [
+        ("e2", "e4"),
+        ("e7", "e5"),
+        ("g1", "f3"),
     ]
     
-    for from_square, to_square in test_moves:
-        from_coords, to_coords = coords.get_move_coordinates(from_square, to_square)
-        print(f"Move {from_square} to {to_square}:")
-        print(f"  From: {from_coords}")
-        print(f"  To: {to_coords}") 
+    for origin, target in sample_moves:
+        origin_coords, target_coords = coord_helper.get_move_coordinates(origin, target)
+        print(f"Move {origin} to {target}:")
+        print(f"  From: {origin_coords}")
+        print(f"  To: {target_coords}")

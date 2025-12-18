@@ -11,222 +11,195 @@ from test_moves import get_lichess_best_move
 from boxCoordinates import BoxCoordinates
 import chess
 
-# Load .env file if it exists
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
-    # dotenv not installed, but that's okay - user might have set env vars manually
     pass
 
-def convert_detected_to_board_state(detected_state):
-    """Convert detected labels ('object', 'object-black', 'empty') to board state labels ('piece-white', 'piece-black', 'empty')"""
-    board_state = [['empty' for _ in range(8)] for _ in range(8)]
-    for row in range(8):
-        for col in range(8):
-            label = detected_state[row][col]
-            if label == 'piece-white':
-                board_state[row][col] = 'piece-white'
-            elif label == 'piece-black':
-                board_state[row][col] = 'piece-black'
-            else:  # 'empty' or 'error'
-                board_state[row][col] = 'empty'
-    return board_state
+def transform_detection_labels(raw_detection):
+    transformed = [['empty' for _ in range(8)] for _ in range(8)]
+    for r_idx in range(8):
+        for c_idx in range(8):
+            cell_label = raw_detection[r_idx][c_idx]
+            if cell_label == 'piece-white':
+                transformed[r_idx][c_idx] = 'piece-white'
+            elif cell_label == 'piece-black':
+                transformed[r_idx][c_idx] = 'piece-black'
+            else:
+                transformed[r_idx][c_idx] = 'empty'
+    return transformed
 
-def detect_white_move_from_frame(board, detected_state):
-    # Convert detected state labels to board state labels
-    detected_state_converted = convert_detected_to_board_state(detected_state)
+def extract_move_from_detection(game_board, detection_matrix):
+    normalized_detection = transform_detection_labels(detection_matrix)
     
-    previous_board_state = [['empty' for _ in range(8)] for _ in range(8)]
-    for square in chess.SQUARES:
-        piece = board.piece_at(square)
-        file = chess.square_file(square)  # 0-7 (a-h)
-        rank = chess.square_rank(square)  # 0-7 (1-8)
-        col = 7 - file  # h->a maps to 0->7
-        row = rank      # 1->8 maps to 0->7
-        if piece:
-            previous_board_state[row][col] = 'piece-white' if piece.color == chess.WHITE else 'piece-black'
+    expected_state = [['empty' for _ in range(8)] for _ in range(8)]
+    for sq in chess.SQUARES:
+        piece_obj = game_board.piece_at(sq)
+        f_idx = chess.square_file(sq)
+        r_idx = chess.square_rank(sq)
+        col_idx = 7 - f_idx
+        row_idx = r_idx
+        if piece_obj:
+            expected_state[row_idx][col_idx] = 'piece-white' if piece_obj.color == chess.WHITE else 'piece-black'
 
-    from_square = None
-    to_square = None
-    for row in range(8):
-        for col in range(8):
-            before = previous_board_state[row][col]
-            after = detected_state_converted[row][col]
-            if before != after:
-                file = 7 - col  # 0->7 maps to h->a
-                rank = row      # 0->7 maps to 1->8
-                square = chess.square(file, rank)
-                if before != 'empty' and after == 'empty':
-                    from_square = square
-                elif before == 'empty' and after != 'empty':
-                    to_square = square
+    origin_sq = None
+    dest_sq = None
+    for row_idx in range(8):
+        for col_idx in range(8):
+            prev_val = expected_state[row_idx][col_idx]
+            curr_val = normalized_detection[row_idx][col_idx]
+            if prev_val != curr_val:
+                f_idx = 7 - col_idx
+                r_idx = row_idx
+                sq = chess.square(f_idx, r_idx)
+                if prev_val != 'empty' and curr_val == 'empty':
+                    origin_sq = sq
+                elif prev_val == 'empty' and curr_val != 'empty':
+                    dest_sq = sq
 
-    if from_square is None or to_square is None:
+    if origin_sq is None or dest_sq is None:
         raise Exception("Could not detect a valid move from the frame.")
 
-    move_uci = chess.square_name(from_square) + chess.square_name(to_square)
-    return move_uci
+    uci_move = chess.square_name(origin_sq) + chess.square_name(dest_sq)
+    return uci_move
 
-class ChessPipeline:
+class ChessBoardAnalyzer:
     def __init__(self):
-        # Load camera calibration
-        with open("cameraMatrix.pkl", 'rb') as f:
-            self.camera_matrix = np.asarray(pickle.load(f), dtype=float)
-        with open("dist.pkl", 'rb') as f:
-            self.dist_coeffs = np.asarray(pickle.load(f), dtype=float)
+        with open("cameraMatrix.pkl", 'rb') as fh:
+            self.cam_intrinsics = np.asarray(pickle.load(fh), dtype=float)
+        with open("dist.pkl", 'rb') as fh:
+            self.distortion_params = np.asarray(pickle.load(fh), dtype=float)
 
-        # Initialize ArUco detector
-        self.marker_length = 5.0 / 100.0  # 5cm in meters
-        self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
-        self.parameters = cv2.aruco.DetectorParameters()
-        self.corner_map = {0:2, 1:3, 2:0, 3:1}
+        self.tag_size = 5.0 / 100.0
+        self.marker_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        self.detect_params = cv2.aruco.DetectorParameters()
+        self.id_to_corner = {0:2, 1:3, 2:0, 3:1}
         
-        # Try to initialize new API (OpenCV 4.7+), fall back to old API if not available
         try:
-            self.aruco_detector = cv2.aruco.ArucoDetector(self.aruco_dict, self.parameters)
-            self.use_new_api = True
+            self.marker_finder = cv2.aruco.ArucoDetector(self.marker_dict, self.detect_params)
+            self.modern_api = True
         except AttributeError:
-            self.aruco_detector = None
-            self.use_new_api = False
+            self.marker_finder = None
+            self.modern_api = False
 
-        # Initialize board state
-        self.board_state = BoardState()
-        self.coords = BoxCoordinates()
+        self.game_state = BoardState()
+        self.square_coords = BoxCoordinates()
         
-        # Initialize Gemini API keys
-        self.keys = [
+        self.api_keys = [
             os.getenv("GEMINI_API_KEY"),
             os.getenv("GEMINI_API_KEY2"),
             os.getenv("GEMINI_API_KEY3"),
             os.getenv("GEMINI_API_KEY4"),
         ]
-        self.current_key_index = 0
+        self.active_key_idx = 0
         
-        # Check if any keys are loaded
-        valid_keys = [key for key in self.keys if key]
-        if not valid_keys:
+        available_keys = [k for k in self.api_keys if k]
+        if not available_keys:
             print("WARNING: No Gemini API keys found in environment variables!")
             print("Please set at least one of: geminiApiKey, geminiApiKey2, geminiApiKey3, geminiApiKey4")
             print("Make sure your .env file is in the project root and contains these variables.")
         else:
-            print(f"Loaded {len(valid_keys)} API key(s)")
+            print(f"Loaded {len(available_keys)} API key(s)")
 
-        # Create output directories
         os.makedirs("grid_piece", exist_ok=True)
 
-    def detect_markers(self, frame):
-        # Support both old and new OpenCV ArUco API
-        if self.use_new_api:
-            # New API (OpenCV 4.7+)
-            corners_list, ids, _ = self.aruco_detector.detectMarkers(frame)
+    def find_board_markers(self, img):
+        if self.modern_api:
+            marker_corners, marker_ids, _ = self.marker_finder.detectMarkers(img)
         else:
-            # Old API (OpenCV < 4.7)
-            corners_list, ids, _ = cv2.aruco.detectMarkers(
-                frame, self.aruco_dict, parameters=self.parameters
+            marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(
+                img, self.marker_dict, parameters=self.detect_params
             )
         
-        if ids is None:
+        if marker_ids is None:
             return None, None, None
 
-        ids = ids.flatten()
+        marker_ids = marker_ids.flatten()
         
-        # Pose estimation (not used in this function, but kept for compatibility)
-        # Only compute if old API is available
-        if not self.use_new_api:
+        if not self.modern_api:
             try:
-                rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(
-                    corners_list, self.marker_length,
-                    self.camera_matrix, self.dist_coeffs
+                rot_vecs, trans_vecs, _ = cv2.aruco.estimatePoseSingleMarkers(
+                    marker_corners, self.tag_size,
+                    self.cam_intrinsics, self.distortion_params
                 )
             except AttributeError:
-                # If estimatePoseSingleMarkers doesn't exist, skip pose estimation
                 pass
 
-        # Get board corners
-        src_pts = np.zeros((4,2), dtype=np.float32)
-        for idx, mid in enumerate(ids):
-            mid = int(mid)
-            if mid not in self.corner_map:
+        corner_points = np.zeros((4,2), dtype=np.float32)
+        for i, tag_id in enumerate(marker_ids):
+            tag_id = int(tag_id)
+            if tag_id not in self.id_to_corner:
                 continue
-            pix = corners_list[idx].reshape(4,2)
-            bidx = self.corner_map[mid]
-            src_pts[bidx] = pix[bidx]
+            corner_pixels = marker_corners[i].reshape(4,2)
+            mapped_idx = self.id_to_corner[tag_id]
+            corner_points[mapped_idx] = corner_pixels[mapped_idx]
 
-        return src_pts, corners_list, ids
+        return corner_points, marker_corners, marker_ids
 
-    def process_frame(self, frame):
-        # Detect markers
-        src_pts, corners_list, ids = self.detect_markers(frame)
-        if src_pts is None:
+    def analyze_frame(self, img):
+        corner_points, marker_corners, marker_ids = self.find_board_markers(img)
+        if corner_points is None:
             print("No markers detected!")
-            return frame
+            return img
 
-        # Draw grid on frame
-        self.draw_grid(frame, src_pts)
+        self.render_grid_overlay(img, corner_points)
         
-        # Compute grid size
-        pixel_per_m = np.linalg.norm(src_pts[0] - src_pts[1]) / self.marker_length
-        PIX_PER_INCH = pixel_per_m * 0.0254
-        GRID_PIX = int(round(2.2 * PIX_PER_INCH))
-        size = GRID_PIX * 8
+        px_per_meter = np.linalg.norm(corner_points[0] - corner_points[1]) / self.tag_size
+        px_per_inch = px_per_meter * 0.0254
+        cell_px = int(round(2.2 * px_per_inch))
+        board_dim = cell_px * 8
 
-        # Warp perspective
-        dst_pts = np.array([[0,0],[size,0],[size,size],[0,size]], dtype=np.float32)
-        H = cv2.getPerspectiveTransform(src_pts, dst_pts)
-        flat_grid = cv2.warpPerspective(frame, H, (size,size))
+        target_corners = np.array([[0,0],[board_dim,0],[board_dim,board_dim],[0,board_dim]], dtype=np.float32)
+        transform_mat = cv2.getPerspectiveTransform(corner_points, target_corners)
+        warped_board = cv2.warpPerspective(img, transform_mat, (board_dim,board_dim))
 
-        # Save grid cells
-        for r in range(8):
-            for c in range(8):
-                y0,y1 = r*GRID_PIX,(r+1)*GRID_PIX
-                x0,x1 = c*GRID_PIX,(c+1)*GRID_PIX
-                cell = flat_grid[y0:y1, x0:x1]
-                cv2.imwrite(f"grid_piece/piece_r{r}_c{c}.png", cell)
+        for row in range(8):
+            for col in range(8):
+                top,bottom = row*cell_px,(row+1)*cell_px
+                left,right = col*cell_px,(col+1)*cell_px
+                square_img = warped_board[top:bottom, left:right]
+                cv2.imwrite(f"grid_piece/piece_r{row}_c{col}.png", square_img)
 
-        # Classify pieces using LLM
-        results = self.classify_pieces()
+        classification_results = self.classify_all_squares()
         
-        # Update detection.json
-        self.update_detection_json(results)
+        self.save_detection_results(classification_results)
         
-        # Detect moves and get best response
-        self.process_moves()
+        self.analyze_game_moves()
 
-        return frame
+        return img
 
-    def classify_pieces(self):
-        results = []
-        # Use gemini-2.5-flash-image for higher rate limits (as suggested by API)
-        model_name = "gemini-2.5-flash-image"
+    def classify_all_squares(self):
+        classification_list = []
+        vlm_model = "gemini-2.5-flash-image"
         
-        for r in range(8):
-            for c in range(8):
-                filename = f"piece_r{r}_c{c}.png"
-                image_path = os.path.join("grid_piece", filename)
+        for row in range(8):
+            for col in range(8):
+                img_name = f"piece_r{row}_c{col}.png"
+                img_path = os.path.join("grid_piece", img_name)
                 
-                if not os.path.isfile(image_path):
+                if not os.path.isfile(img_path):
                     continue
 
-                label = "error"
-                attempts = 0
-                max_retries = 3  # Maximum retries per key
+                result_label = "error"
+                try_count = 0
+                max_tries = 3
                 
-                while attempts < len(self.keys) * max_retries:
-                    key = self.keys[self.current_key_index]
+                while try_count < len(self.api_keys) * max_tries:
+                    current_key = self.api_keys[self.active_key_idx]
                     
-                    if not key:
-                        self.current_key_index = (self.current_key_index + 1) % len(self.keys)
-                        attempts += 1
+                    if not current_key:
+                        self.active_key_idx = (self.active_key_idx + 1) % len(self.api_keys)
+                        try_count += 1
                         continue
 
                     try:
-                        client = genai.Client(api_key=key)
-                        img = Image.open(image_path)
-                        response = client.models.generate_content(
-                            model=model_name,
+                        api_client = genai.Client(api_key=current_key)
+                        square_img = Image.open(img_path)
+                        api_response = api_client.models.generate_content(
+                            model=vlm_model,
                             contents=[
-                                img,
+                                square_img,
                                 (
                                     "This is a top-down photo of a single chess board square. "
                                     "Classify what you see into exactly ONE of these three categories:\n\n"
@@ -239,180 +212,168 @@ class ChessPipeline:
                                 )
                             ],
                         )
-                        label = response.text.strip().lower()
-                        # Validate response
-                        if label not in ['empty', 'piece-white', 'piece-black']:
-                            print(f"Warning: Invalid label '{label}' for piece_r{r}_c{c}.png, retrying...")
-                            time.sleep(1)  # Brief delay before retry
-                            attempts += 1
+                        result_label = api_response.text.strip().lower()
+                        if result_label not in ['empty', 'piece-white', 'piece-black']:
+                            print(f"Warning: Invalid label '{result_label}' for piece_r{row}_c{col}.png, retrying...")
+                            time.sleep(1)
+                            try_count += 1
                             continue
                         break
-                    except Exception as e:
-                        error_str = str(e)
-                        # Check if it's a rate limit error
-                        if '429' in error_str or 'RESOURCE_EXHAUSTED' in error_str or 'quota' in error_str.lower():
-                            # Extract retry delay if available
-                            retry_delay = 2.0  # Default delay
-                            if 'retryDelay' in error_str or 'retry in' in error_str.lower():
-                                # Try to extract delay (simplified - could be improved)
-                                retry_delay = 3.0
+                    except Exception as err:
+                        err_msg = str(err)
+                        if '429' in err_msg or 'RESOURCE_EXHAUSTED' in err_msg or 'quota' in err_msg.lower():
+                            wait_time = 2.0
+                            if 'retryDelay' in err_msg or 'retry in' in err_msg.lower():
+                                wait_time = 3.0
                             
-                            print(f"Rate limit hit for key ending in ...{key[-4:] if key else 'N/A'}, waiting {retry_delay}s...")
-                            time.sleep(retry_delay)
-                            # Try next key
-                            self.current_key_index = (self.current_key_index + 1) % len(self.keys)
-                            attempts += 1
+                            print(f"Rate limit hit for key ending in ...{current_key[-4:] if current_key else 'N/A'}, waiting {wait_time}s...")
+                            time.sleep(wait_time)
+                            self.active_key_idx = (self.active_key_idx + 1) % len(self.api_keys)
+                            try_count += 1
                         else:
-                            print(f"Error with key ending in ...{key[-4:] if key else 'N/A'}: {error_str[:100]}")
-                            self.current_key_index = (self.current_key_index + 1) % len(self.keys)
-                            attempts += 1
+                            print(f"Error with key ending in ...{current_key[-4:] if current_key else 'N/A'}: {err_msg[:100]}")
+                            self.active_key_idx = (self.active_key_idx + 1) % len(self.api_keys)
+                            try_count += 1
                     
-                    # Add delay between API calls to avoid rate limits
-                    time.sleep(0.5)  # 500ms delay between requests
+                    time.sleep(0.5)
                 
-                if label == "error":
-                    print(f"Failed to classify piece_r{r}_c{c}.png after {attempts} attempts")
+                if result_label == "error":
+                    print(f"Failed to classify piece_r{row}_c{col}.png after {try_count} attempts")
                 
-                results.append((r, c, label))
+                classification_list.append((row, col, result_label))
                 
-                # Progress indicator
-                if (r * 8 + c + 1) % 8 == 0:
-                    print(f"Progress: {r * 8 + c + 1}/64 squares classified")
+                if (row * 8 + col + 1) % 8 == 0:
+                    print(f"Progress: {row * 8 + col + 1}/64 squares classified")
         
-        return results
+        return classification_list
 
-    def update_detection_json(self, results):
-        detection_file = "detection.json"
+    def save_detection_results(self, classification_list):
+        output_file = "detection.json"
         
-        if os.path.exists(detection_file):
-            with open(detection_file, "r") as f:
-                data = json.load(f)
+        if os.path.exists(output_file):
+            with open(output_file, "r") as fh:
+                stored_data = json.load(fh)
         else:
-            data = []
+            stored_data = []
 
-        new_id = len(data) + 1
-        run_entry = {
-            "id": new_id,
+        entry_id = len(stored_data) + 1
+        new_entry = {
+            "id": entry_id,
             "results": [
-                {"r": r, "c": c, "label": label}
-                for r, c, label in results
+                {"r": row, "c": col, "label": lbl}
+                for row, col, lbl in classification_list
             ]
         }
 
-        data.append(run_entry)
-        with open(detection_file, "w") as f:
-            json.dump(data, f, indent=2)
+        stored_data.append(new_entry)
+        with open(output_file, "w") as fh:
+            json.dump(stored_data, fh, indent=2)
 
-    def process_moves(self):
+    def analyze_game_moves(self):
         try:
-            with open('detection.json', 'r') as f:
-                data = json.load(f)
+            with open('detection.json', 'r') as fh:
+                stored_data = json.load(fh)
             
-            if len(data) < 1:
+            if len(stored_data) < 1:
                 return
 
-            # Get the latest frame
-            curr_frame = data[-1]
+            latest_frame = stored_data[-1]
 
-            # Convert frame to board state
-            curr_state = [['empty' for _ in range(8)] for _ in range(8)]
+            current_detection = [['empty' for _ in range(8)] for _ in range(8)]
 
-            for cell in curr_frame['results']:
-                curr_state[cell['r']][cell['c']] = cell['label']
+            for square_data in latest_frame['results']:
+                current_detection[square_data['r']][square_data['c']] = square_data['label']
 
-            # Detect move (works for both white and black)
             try:
-                detected_move = detect_white_move_from_frame(self.board_state.board, curr_state)
-            except Exception as e:
-                # No valid move detected (expected when board states are identical or no move occurred)
-                print(f"Note: {str(e)}")
+                identified_move = extract_move_from_detection(self.game_state.board, current_detection)
+            except Exception as err:
+                print(f"Note: {str(err)}")
                 return
             
-            move_obj = chess.Move.from_uci(detected_move)
+            move_object = chess.Move.from_uci(identified_move)
             
-            # Determine whose turn it is
-            is_white_turn = self.board_state.board.turn == chess.WHITE
+            white_to_move = self.game_state.board.turn == chess.WHITE
             
-            if move_obj in self.board_state.board.legal_moves:
-                from_square = detected_move[:2]
-                to_square = detected_move[2:]
-                pickup, place = self.coords.get_move_coordinates(from_square, to_square)
+            if move_object in self.game_state.board.legal_moves:
+                src_square = identified_move[:2]
+                dst_square = identified_move[2:]
+                grab_pos, drop_pos = self.square_coords.get_move_coordinates(src_square, dst_square)
                 
-                # Apply the detected move
-                if is_white_turn:
-                    print(f"White move detected: {detected_move}")
-                    print(f"Robot coordinates - Pickup: {pickup}, Place: {place}")
+                if white_to_move:
+                    print(f"White move detected: {identified_move}")
+                    print(f"Robot coordinates - Pickup: {grab_pos}, Place: {drop_pos}")
                 else:
-                    print(f"Black move detected: {detected_move}")
-                    print(f"Robot coordinates - Pickup: {pickup}, Place: {place}")
+                    print(f"Black move detected: {identified_move}")
+                    print(f"Robot coordinates - Pickup: {grab_pos}, Place: {drop_pos}")
                 
-                self.board_state.board.push(move_obj)
-                print(f"\nBoard state after {'White' if is_white_turn else 'Black'} move:")
-                print(self.board_state.board)
-                fen_after_move = self.board_state.board.fen()
-                print(f"FEN after move: {fen_after_move}")
+                self.game_state.board.push(move_object)
+                print(f"\nBoard state after {'White' if white_to_move else 'Black'} move:")
+                print(self.game_state.board)
+                current_fen = self.game_state.board.fen()
+                print(f"FEN after move: {current_fen}")
                 
-                # Get opponent's best move (suggestion only, don't apply it)
-                if self.board_state.board.turn == chess.BLACK:
-                    best_black_move = get_lichess_best_move(fen_after_move)
-                    print(f"\nSuggested Black move: {best_black_move}")
-                    black_move_obj = chess.Move.from_uci(best_black_move)
-                    if black_move_obj in self.board_state.board.legal_moves:
-                        from_square = best_black_move[:2]
-                        to_square = best_black_move[2:]
-                        black_pickup, black_place = self.coords.get_move_coordinates(from_square, to_square)
-                        print(f"Robot coordinates for Black move - Pickup: {black_pickup}, Place: {black_place}")
+                if self.game_state.board.turn == chess.BLACK:
+                    engine_suggestion = get_lichess_best_move(current_fen)
+                    print(f"\nSuggested Black move: {engine_suggestion}")
+                    suggested_move = chess.Move.from_uci(engine_suggestion)
+                    if suggested_move in self.game_state.board.legal_moves:
+                        src_sq = engine_suggestion[:2]
+                        dst_sq = engine_suggestion[2:]
+                        opp_grab, opp_drop = self.square_coords.get_move_coordinates(src_sq, dst_sq)
+                        print(f"Robot coordinates for Black move - Pickup: {opp_grab}, Place: {opp_drop}")
                         print("(Move not applied - waiting for physical move on board)")
                     else:
-                        print(f"⚠ Illegal Black move suggested: {best_black_move}")
+                        print(f"⚠ Illegal Black move suggested: {engine_suggestion}")
                 else:
                     print("\nIt's White's turn to move.")
             else:
-                print(f"⚠ Illegal move detected: {detected_move}")
+                print(f"⚠ Illegal move detected: {identified_move}")
 
-        except Exception as e:
-            print(f"Error processing moves: {e}")
+        except Exception as err:
+            print(f"Error processing moves: {err}")
 
-    def draw_grid(self, img, src_pts, grid_size=8, color=(0,255,0), thickness=2):
-        tl, tr, br, bl = src_pts
-        for i in range(1, grid_size):
-            α = i / float(grid_size)
-            # vertical
-            start = tuple((tl + α*(tr - tl)).astype(int))
-            end = tuple((bl + α*(br - bl)).astype(int))
-            cv2.line(img, start, end, color, thickness)
-            # horizontal
-            start = tuple((tl + α*(bl - tl)).astype(int))
-            end = tuple((tr + α*(br - tr)).astype(int))
-            cv2.line(img, start, end, color, thickness)
+    def render_grid_overlay(self, img, corner_points, num_cells=8, line_color=(0,255,0), line_width=2):
+        pt_tl, pt_tr, pt_br, pt_bl = corner_points
+        for idx in range(1, num_cells):
+            ratio = idx / float(num_cells)
+            line_start = tuple((pt_tl + ratio*(pt_tr - pt_tl)).astype(int))
+            line_end = tuple((pt_bl + ratio*(pt_br - pt_bl)).astype(int))
+            cv2.line(img, line_start, line_end, line_color, line_width)
+            line_start = tuple((pt_tl + ratio*(pt_bl - pt_tl)).astype(int))
+            line_end = tuple((pt_tr + ratio*(pt_br - pt_tr)).astype(int))
+            cv2.line(img, line_start, line_end, line_color, line_width)
 
-def main():
-    pipeline = ChessPipeline()
-    cap = cv2.VideoCapture(0)
+ChessPipeline = ChessBoardAnalyzer
+
+def run_application():
+    analyzer = ChessBoardAnalyzer()
+    video_capture = cv2.VideoCapture(0)
 
     print("Press 'S' to capture and process frame")
     print("Press 'Q' to quit")
 
     while True:
-        ret, frame = cap.read()
-        if not ret:
+        success, current_frame = video_capture.read()
+        if not success:
             break
 
-        # Display the frame
-        cv2.imshow('Chess Pipeline', frame)
+        cv2.imshow('Chess Pipeline', current_frame)
 
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):
+        pressed_key = cv2.waitKey(1) & 0xFF
+        if pressed_key == ord('q'):
             break
-        if key == ord('s'):
+        if pressed_key == ord('s'):
             print('Processing...')
-            out = pipeline.process_frame(frame)
-            cv2.imshow('Processed', out)
+            processed = analyzer.analyze_frame(current_frame)
+            cv2.imshow('Processed', processed)
             cv2.waitKey(0)
             cv2.destroyWindow('Processed')
 
-    cap.release()
+    video_capture.release()
     cv2.destroyAllWindows()
 
+def main():
+    run_application()
+
 if __name__ == "__main__":
-    main() 
+    main()

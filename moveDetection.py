@@ -2,158 +2,145 @@ import chess
 import numpy as np
 import copy
 
-# Initial board position in FEN
-INITIAL_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+STARTING_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 class BoardState:
     def __init__(self):
-        self.board = chess.Board(INITIAL_FEN)
-        self.piece_types = self._initialize_piece_types()
-        self.history = []  # List of (FEN, move) tuples
-        self.turn = 'w'  # Track whose turn it is ('w' or 'b')
+        self.board = chess.Board(STARTING_FEN)
+        self.piece_grid = self._setup_initial_pieces()
+        self.move_log = []
+        self.active_color = 'w'
 
-    def _initialize_piece_types(self):
-        piece_types = [['empty'] * 8 for _ in range(8)]
-        piece_types[0] = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
-        piece_types[1] = ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P']
-        piece_types[6] = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p']
-        piece_types[7] = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
-        return piece_types
+    def _setup_initial_pieces(self):
+        grid = [['empty'] * 8 for _ in range(8)]
+        grid[0] = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+        grid[1] = ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P']
+        grid[6] = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p']
+        grid[7] = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
+        return grid
 
-    def set_board_state(self, detected_state):
-        initial_pieces = self._initialize_piece_types()
-        for row in range(8):
-            for col in range(8):
-                if detected_state[row][col] == 'piece-white':
-                    if initial_pieces[row][col].isupper():
-                        self.piece_types[row][col] = initial_pieces[row][col]
+    def set_board_state(self, detection_grid):
+        initial_setup = self._setup_initial_pieces()
+        for r in range(8):
+            for c in range(8):
+                if detection_grid[r][c] == 'piece-white':
+                    if initial_setup[r][c].isupper():
+                        self.piece_grid[r][c] = initial_setup[r][c]
                     else:
-                        self.piece_types[row][col] = 'P'
-                elif detected_state[row][col] == 'piece-black':
-                    if initial_pieces[row][col].islower():
-                        self.piece_types[row][col] = initial_pieces[row][col]
+                        self.piece_grid[r][c] = 'P'
+                elif detection_grid[r][c] == 'piece-black':
+                    if initial_setup[r][c].islower():
+                        self.piece_grid[r][c] = initial_setup[r][c]
                     else:
-                        self.piece_types[row][col] = 'p'
+                        self.piece_grid[r][c] = 'p'
                 else:
-                    self.piece_types[row][col] = 'empty'
+                    self.piece_grid[r][c] = 'empty'
 
-    def update_from_detection(self, detected_state):
-        from_square, to_square = self._detect_move(detected_state)
-        if from_square and to_square:
-            fen_before = self.get_fen()
-            self.history.append((fen_before, f"{from_square}->{to_square}"))
+    def update_from_detection(self, detection_grid):
+        src_sq, dst_sq = self._find_move_squares(detection_grid)
+        if src_sq and dst_sq:
+            prev_fen = self.get_fen()
+            self.move_log.append((prev_fen, f"{src_sq}->{dst_sq}"))
 
-            from_row, from_col = self._algebraic_to_coords(from_square)
-            to_row, to_col = self._algebraic_to_coords(to_square)
+            src_r, src_c = self._notation_to_indices(src_sq)
+            dst_r, dst_c = self._notation_to_indices(dst_sq)
 
-            # Store the piece that's moving
-            moving_piece = self.piece_types[from_row][from_col]
+            moved_piece = self.piece_grid[src_r][src_c]
             
-            # Clear both squares
-            self.piece_types[from_row][from_col] = 'empty'
-            self.piece_types[to_row][to_col] = 'empty'
+            self.piece_grid[src_r][src_c] = 'empty'
+            self.piece_grid[dst_r][dst_c] = 'empty'
             
-            # Place the piece in its new position
-            self.piece_types[to_row][to_col] = moving_piece
+            self.piece_grid[dst_r][dst_c] = moved_piece
 
-            # Update the chess board
-            move = chess.Move.from_uci(f"{from_square}{to_square}")
-            self.board.push(move)
+            chess_move = chess.Move.from_uci(f"{src_sq}{dst_sq}")
+            self.board.push(chess_move)
 
-            if (moving_piece.lower() == 'p' and 
-                ((to_row == 0 and moving_piece.isupper()) or 
-                 (to_row == 7 and moving_piece.islower()))):
-                self.piece_types[to_row][to_col] = 'Q' if moving_piece.isupper() else 'q'
+            if (moved_piece.lower() == 'p' and 
+                ((dst_r == 0 and moved_piece.isupper()) or 
+                 (dst_r == 7 and moved_piece.islower()))):
+                self.piece_grid[dst_r][dst_c] = 'Q' if moved_piece.isupper() else 'q'
 
-            # Flip turn after move
-            self.turn = 'b' if self.turn == 'w' else 'w'
+            self.active_color = 'b' if self.active_color == 'w' else 'w'
 
     def undo_last_move(self):
-        if not self.history:
+        if not self.move_log:
             print("No moves to undo.")
             return
-        last_fen, last_move = self.history.pop()
-        self._load_fen_into_pieces(last_fen)
-        print(f"Undid move: {last_move}")
-        # Flip turn back after undo
-        self.turn = 'b' if self.turn == 'w' else 'w'
+        prev_fen, prev_move = self.move_log.pop()
+        self._restore_from_fen(prev_fen)
+        print(f"Undid move: {prev_move}")
+        self.active_color = 'b' if self.active_color == 'w' else 'w'
 
-    def _load_fen_into_pieces(self, fen):
-        rows = fen.split(' ')[0].split('/')
-        for row_idx, row_str in enumerate(rows):
-            col_idx = 0
-            for char in row_str:
-                if char.isdigit():
-                    for _ in range(int(char)):
-                        self.piece_types[7 - row_idx][col_idx] = 'empty'
-                        col_idx += 1
+    def _restore_from_fen(self, fen_str):
+        rank_strings = fen_str.split(' ')[0].split('/')
+        for rank_idx, rank_data in enumerate(rank_strings):
+            file_idx = 0
+            for ch in rank_data:
+                if ch.isdigit():
+                    for _ in range(int(ch)):
+                        self.piece_grid[7 - rank_idx][file_idx] = 'empty'
+                        file_idx += 1
                 else:
-                    self.piece_types[7 - row_idx][col_idx] = char
-                    col_idx += 1
+                    self.piece_grid[7 - rank_idx][file_idx] = ch
+                    file_idx += 1
 
-    def _detect_move(self, detected_state):
-        differences = []
-        for row in range(8):
-            for col in range(8):
-                current = 'empty' if self.piece_types[row][col] == 'empty' else (
-                    'piece-white' if self.piece_types[row][col].isupper() else 'piece-black'
+    def _find_move_squares(self, detection_grid):
+        changed_squares = []
+        for r in range(8):
+            for c in range(8):
+                current_state = 'empty' if self.piece_grid[r][c] == 'empty' else (
+                    'piece-white' if self.piece_grid[r][c].isupper() else 'piece-black'
                 )
-                if current != detected_state[row][col]:
-                    differences.append((row, col))
+                if current_state != detection_grid[r][c]:
+                    changed_squares.append((r, c))
 
-        if len(differences) != 2:
-            raise ValueError(f"Invalid move detected - expected exactly 2 squares to change, got {len(differences)}")
+        if len(changed_squares) != 2:
+            raise ValueError(f"Invalid move detected - expected exactly 2 squares to change, got {len(changed_squares)}")
 
-        from_square, to_square = None, None
-        for row, col in differences:
-            current = 'empty' if self.piece_types[row][col] == 'empty' else (
-                'piece-white' if self.piece_types[row][col].isupper() else 'piece-black'
+        src_sq, dst_sq = None, None
+        for r, c in changed_squares:
+            current_state = 'empty' if self.piece_grid[r][c] == 'empty' else (
+                'piece-white' if self.piece_grid[r][c].isupper() else 'piece-black'
             )
-            if current != 'empty' and detected_state[row][col] == 'empty':
-                from_square = self._coords_to_algebraic(row, col)
-            elif current == 'empty' and detected_state[row][col] != 'empty':
-                to_square = self._coords_to_algebraic(row, col)
+            if current_state != 'empty' and detection_grid[r][c] == 'empty':
+                src_sq = self._indices_to_notation(r, c)
+            elif current_state == 'empty' and detection_grid[r][c] != 'empty':
+                dst_sq = self._indices_to_notation(r, c)
 
-        return from_square, to_square
+        return src_sq, dst_sq
 
-    def _coords_to_algebraic(self, row, col):
-        # Convert from (row,col) to algebraic notation
-        # row: 0-7 (bottom to top)
-        # col: 0-7 (right to left)
-        file = chr(ord('h') - col)  # h->a maps to 0->7
-        rank = str(row + 1)  # 0->7 maps to 1->8
-        return file + rank
+    def _indices_to_notation(self, r, c):
+        file_char = chr(ord('h') - c)
+        rank_char = str(r + 1)
+        return file_char + rank_char
 
-    def _algebraic_to_coords(self, square):
-        # Convert from algebraic notation to (row,col)
-        # square format: 'e4', 'h1', etc.
-        file = ord('h') - (ord(square[0]) - ord('a'))  # h->a maps to 0->7
-        rank = int(square[1]) - 1  # 1->8 maps to 0->7
-        return rank, file
+    def _notation_to_indices(self, notation):
+        file_idx = ord('h') - (ord(notation[0]) - ord('a'))
+        rank_idx = int(notation[1]) - 1
+        return rank_idx, file_idx
 
     def get_fen(self):
-        fen = ""
-        for row in range(7, -1, -1):
+        fen_str = ""
+        for r in range(7, -1, -1):
             empty_count = 0
-            for col in range(8):
-                piece = self.piece_types[row][col]
-                if piece == 'empty':
+            for c in range(8):
+                piece_char = self.piece_grid[r][c]
+                if piece_char == 'empty':
                     empty_count += 1
                 else:
                     if empty_count > 0:
-                        fen += str(empty_count)
+                        fen_str += str(empty_count)
                         empty_count = 0
-                    fen += piece
+                    fen_str += piece_char
             
             if empty_count > 0:
-                fen += str(empty_count)
-            if row > 0:
-                fen += '/'
+                fen_str += str(empty_count)
+            if r > 0:
+                fen_str += '/'
         
-        # Add remaining FEN components with current turn
-        fen += f" {self.turn} KQkq - 0 1"
-        return fen
+        fen_str += f" {self.active_color} KQkq - 0 1"
+        return fen_str
 
     def print_history(self):
-        for idx, (fen, move) in enumerate(self.history):
+        for idx, (fen, move) in enumerate(self.move_log):
             print(f"Move {idx + 1}: {move} → {fen}")

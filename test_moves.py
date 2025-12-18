@@ -4,127 +4,125 @@ import chess
 from moveDetection import BoardState
 from boxCoordinates import BoxCoordinates
 
-def get_lichess_best_move(fen):
-    url = f"https://lichess.org/api/cloud-eval?fen={fen}&multiPv=1"
-    response = requests.get(url)
+def get_lichess_best_move(fen_string):
+    api_url = f"https://lichess.org/api/cloud-eval?fen={fen_string}&multiPv=1"
+    response = requests.get(api_url)
     if response.status_code == 200:
-        data = response.json()
-        return data['pvs'][0]['moves'].split()[0]
+        result = response.json()
+        return result['pvs'][0]['moves'].split()[0]
     else:
         raise Exception(f"Lichess API error: {response.status_code}, {response.text}")
 
-def detect_white_move_from_frame(board, detected_state):
-    previous_board_state = [['empty' for _ in range(8)] for _ in range(8)]
-    for square in chess.SQUARES:
-        piece = board.piece_at(square)
-        # Convert chess square to our coordinate system
-        file = chess.square_file(square)  # 0-7 (a-h)
-        rank = chess.square_rank(square)  # 0-7 (1-8)
-        # Convert to our coordinate system where (0,0) is h1
-        col = 7 - file  # h->a maps to 0->7
-        row = rank      # 1->8 maps to 0->7
-        if piece:
-            previous_board_state[row][col] = 'piece-white' if piece.color == chess.WHITE else 'piece-black'
+def find_move_from_detection(game_board, detection_grid):
+    expected_grid = [['empty' for _ in range(8)] for _ in range(8)]
+    for sq in chess.SQUARES:
+        piece_obj = game_board.piece_at(sq)
+        f = chess.square_file(sq)
+        r = chess.square_rank(sq)
+        c = 7 - f
+        row = r
+        if piece_obj:
+            expected_grid[row][c] = 'piece-white' if piece_obj.color == chess.WHITE else 'piece-black'
 
-    from_square = None
-    to_square = None
+    origin = None
+    destination = None
     for row in range(8):
         for col in range(8):
-            before = previous_board_state[row][col]
-            after = detected_state[row][col]
-            if before != after:
-                # Convert our coordinates back to chess square
-                file = 7 - col  # 0->7 maps to h->a
-                rank = row      # 0->7 maps to 1->8
-                square = chess.square(file, rank)
-                if before != 'empty' and after == 'empty':
-                    from_square = square
-                elif before == 'empty' and after != 'empty':
-                    to_square = square
+            prev = expected_grid[row][col]
+            curr = detection_grid[row][col]
+            if prev != curr:
+                f = 7 - col
+                r = row
+                sq = chess.square(f, r)
+                if prev != 'empty' and curr == 'empty':
+                    origin = sq
+                elif prev == 'empty' and curr != 'empty':
+                    destination = sq
 
-    if from_square is None or to_square is None:
+    if origin is None or destination is None:
         raise Exception("Could not detect a valid move from the frame.")
 
-    move_uci = chess.square_name(from_square) + chess.square_name(to_square)
-    return move_uci
+    move_str = chess.square_name(origin) + chess.square_name(destination)
+    return move_str
 
-def main():
-    board_state = BoardState()
-    coords = BoxCoordinates()
-    print(f"Starting position: {board_state.get_fen()}")
+def run_test():
+    game = BoardState()
+    coord_mapper = BoxCoordinates()
+    print(f"Starting position: {game.get_fen()}")
     print("\nInitial board state:")
-    print(board_state.board)
+    print(game.board)
 
     try:
-        with open('detection.json', 'r') as f:
-            data = json.load(f)
-    except Exception as e:
-        print(f"Error reading detection.json: {e}")
+        with open('detection.json', 'r') as fh:
+            detection_data = json.load(fh)
+    except Exception as err:
+        print(f"Error reading detection.json: {err}")
         return
 
-    for frame in data:
-        frame_id = frame.get('id')
+    for frame_data in detection_data:
+        frame_num = frame_data.get('id')
 
-        if frame_id == 1:
-            print(f"Initializing board from frame {frame_id}")
-            continue  # skip initial frame
+        if frame_num == 1:
+            print(f"Initializing board from frame {frame_num}")
+            continue
 
-        print(f"\nProcessing frame {frame_id}...")
+        print(f"\nProcessing frame {frame_num}...")
 
         try:
-            detected_state = [['empty' for _ in range(8)] for _ in range(8)]
-            for cell in frame.get('results', []):
-                detected_state[cell['r']][cell['c']] = cell['label']
+            detection_grid = [['empty' for _ in range(8)] for _ in range(8)]
+            for cell in frame_data.get('results', []):
+                detection_grid[cell['r']][cell['c']] = cell['label']
 
-            detected_white_move = detect_white_move_from_frame(board_state.board, detected_state)
+            white_move = find_move_from_detection(game.board, detection_grid)
 
-            white_move_obj = chess.Move.from_uci(detected_white_move)
-            if white_move_obj in board_state.board.legal_moves:
-                # Get robot coordinates for White's move
-                from_square = detected_white_move[:2]
-                to_square = detected_white_move[2:]
-                white_pickup, white_place = coords.get_move_coordinates(from_square, to_square)
-                print(f"White move: {detected_white_move}")
-                print(f"Robot coordinates - Pickup: {white_pickup}, Place: {white_place}")
+            move_obj = chess.Move.from_uci(white_move)
+            if move_obj in game.board.legal_moves:
+                src = white_move[:2]
+                dst = white_move[2:]
+                pickup_pos, drop_pos = coord_mapper.get_move_coordinates(src, dst)
+                print(f"White move: {white_move}")
+                print(f"Robot coordinates - Pickup: {pickup_pos}, Place: {drop_pos}")
                 
-                board_state.board.push(white_move_obj)
+                game.board.push(move_obj)
                 print("\nBoard state after White move:")
-                print(board_state.board)
+                print(game.board)
             else:
-                print(f"⚠ Illegal White move detected: {detected_white_move}")
+                print(f"⚠ Illegal White move detected: {white_move}")
                 continue
 
-            fen_after_white = board_state.board.fen()
-            print(f"FEN after White move: {fen_after_white}")
+            current_fen = game.board.fen()
+            print(f"FEN after White move: {current_fen}")
 
-            best_black_move = get_lichess_best_move(fen_after_white)
-            print(f"Lichess best move for Black: {best_black_move}")
+            best_response = get_lichess_best_move(current_fen)
+            print(f"Lichess best move for Black: {best_response}")
 
-            black_move_obj = chess.Move.from_uci(best_black_move)
-            if black_move_obj in board_state.board.legal_moves:
-                # Get robot coordinates for Black's move
-                from_square = best_black_move[:2]
-                to_square = best_black_move[2:]
-                black_pickup, black_place = coords.get_move_coordinates(from_square, to_square)
-                print(f"Black move: {best_black_move}")
-                print(f"Robot coordinates - Pickup: {black_pickup}, Place: {black_place}")
+            response_obj = chess.Move.from_uci(best_response)
+            if response_obj in game.board.legal_moves:
+                src = best_response[:2]
+                dst = best_response[2:]
+                pickup_pos, drop_pos = coord_mapper.get_move_coordinates(src, dst)
+                print(f"Black move: {best_response}")
+                print(f"Robot coordinates - Pickup: {pickup_pos}, Place: {drop_pos}")
                 
-                board_state.board.push(black_move_obj)
+                game.board.push(response_obj)
                 print("\nBoard state after Black move:")
-                print(board_state.board)
+                print(game.board)
             else:
-                print(f"⚠ Illegal Black move detected: {best_black_move}")
+                print(f"⚠ Illegal Black move detected: {best_response}")
 
-            print(f"FEN after Black move: {board_state.board.fen()}")
+            print(f"FEN after Black move: {game.board.fen()}")
 
-        except Exception as e:
-            print(f"Error processing frame {frame_id}: {e}")
+        except Exception as err:
+            print(f"Error processing frame {frame_num}: {err}")
 
     print("\n=== Final Move History ===")
-    board_state.print_history()
-    print(f"Final FEN: {board_state.board.fen()}")
+    game.print_history()
+    print(f"Final FEN: {game.board.fen()}")
     print("\nFinal board state:")
-    print(board_state.board)
+    print(game.board)
+
+def main():
+    run_test()
 
 if __name__ == "__main__":
     main()
